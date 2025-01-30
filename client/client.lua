@@ -5,8 +5,8 @@ for k, v in ipairs(Config.StashLocs) do
 
 
     RegisterNetEvent('MGCodeStashes:openStash' .. v.id, function()
-        local input = lib.inputDialog('Sklad', {
-            {type = 'input', label = 'Code For Stash', required = true, password = true, icon = 'fa-solid fa-lock'},
+        local input = lib.inputDialog('Stash', {
+            {type = 'input', label = Locale["CodePlace"], required = true, password = true, icon = 'fa-solid fa-lock'},
           })
 
         if input then
@@ -15,8 +15,8 @@ for k, v in ipairs(Config.StashLocs) do
                 exports.ox_inventory:openInventory('stash', v.id)
             else
                 lib.notify({
-                    title = 'Code',
-                    description = 'You entered the wrong code',
+                    title = Locale["NotifyTittle"],
+                    description = Locale["NotifyDesc"],
                     type = 'error'
                 })
             end
@@ -34,7 +34,7 @@ for k, v in ipairs(Config.StashLocs) do
                 type = "client",
                 event = 'MGCodeStashes:openStash'.. v.id,
                 icon = Config.TargetIcon,
-                label = Config.TargetLabel,     -- Use the index to specify the label of the box
+                label = Locale["TargetLabel"],     -- Use the index to specify the label of the box
                 distance = 3,
             }
         }
