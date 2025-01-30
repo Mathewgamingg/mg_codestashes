@@ -6,19 +6,21 @@ author 'MG / MathewGaming'
 description 'Script for code on stashes in houses etc.'
 
 client_scripts {
-    "client/client.lua",
+    "client/*.lua",
 }
 
 server_scripts {
-    'server/server.lua',
+    'server/*.lua',
     '@oxmysql/lib/MySQL.lua'
 }
 
 shared_scripts {
-    "config.lua",
+    "configs/config.lua",
     '@ox_lib/init.lua',
+    'locales/locale.lua'
 }
 
 escrow_ignore {
-    'config.lua'
+    'configs/config.lua',
+    'locales/locale.lua'
 }
