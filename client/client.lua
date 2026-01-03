@@ -1,10 +1,10 @@
 local ESX = exports["es_extended"]:getSharedObject()
 
 for k, v in ipairs(Config.StashLocs) do
-    TriggerServerEvent('MGCodeStashes:registerStash', v.id, v.label, v.slots, v.weight * 1000, vector3(v.coords.x, v.coords.y, v.coords.z + 1))
+    TriggerServerEvent('mg_codestashes:registerStash', v.id, v.label, v.slots, v.weight * 1000, vector3(v.coords.x, v.coords.y, v.coords.z + 1))
 
 
-    RegisterNetEvent('MGCodeStashes:openStash' .. v.id, function()
+    RegisterNetEvent('mg_codestashes:openStash' .. v.id, function()
         local input = lib.inputDialog('Stash', {
             {type = 'input', label = Locale["CodePlace"], required = true, password = true, icon = 'fa-solid fa-lock'},
           })
@@ -32,7 +32,7 @@ for k, v in ipairs(Config.StashLocs) do
         options = {
             {
                 type = "client",
-                event = 'MGCodeStashes:openStash'.. v.id,
+                event = 'mg_codestashes:openStash'.. v.id,
                 icon = Config.TargetIcon,
                 label = Locale["TargetLabel"],     -- Use the index to specify the label of the box
                 distance = 3,
