@@ -1,4 +1,4 @@
-Představujeme vám MG_CodeStashes, jednoduchý, ale efektivní skript pro FiveM, který umožňuje hráčům využívat úložné prostory (stashes) zabezpečené číselným kódem. Ideální pro gangové domy, sdílené úkryty nebo tajné schránky.
+Představuji vám script na Zamčené sklady (stashe), jednoduchý, ale efektivní skript pro FiveM, který umožňuje hráčům využívat úložné prostory (stashes) zabezpečené číselným kódem. Ideální pro gangové domy, sdílené úkryty nebo tajné schránky.
 
 ✨ Klíčové vlastnosti:
    Zabezpečení kódem: Každý sklad má svůj unikátní kód definovaný v konfiguraci.
