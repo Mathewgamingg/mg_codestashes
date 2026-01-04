@@ -1,43 +1,50 @@
-local ESX = exports["es_extended"]:getSharedObject()
+local MG = exports['mg_bridge']:getBridge()
+
+local function DoDebug(msg)
+    if Config.Debug then
+        print('^4[MG_CodeStashes:DEBUG] ^7' .. msg)
+    end
+end
 
 for k, v in ipairs(Config.StashLocs) do
-    TriggerServerEvent('MGCodeStashes:registerStash', v.id, v.label, v.slots, v.weight * 1000, vector3(v.coords.x, v.coords.y, v.coords.z + 1))
+    TriggerServerEvent('mg_codestashes:registerStash', v.id, v.label, v.slots, v.weight * 1000, v.coords)
 
-
-    RegisterNetEvent('MGCodeStashes:openStash' .. v.id, function()
-        local input = lib.inputDialog('Stash', {
-            {type = 'input', label = Locale["CodePlace"], required = true, password = true, icon = 'fa-solid fa-lock'},
-          })
+    RegisterNetEvent('mg_codestashes:openStash' .. v.id, function()
+        DoDebug('Pokus o otevření stashe: ' .. v.id)
+        
+        local input = lib.inputDialog(v.label, {
+            {
+                type = 'input', 
+                label = Locale["CodePlace"], 
+                required = true, 
+                password = true, 
+                icon = 'fa-solid fa-lock'
+            },
+        })
 
         if input then
-            local kod = input[1]
-            if kod == v.kod then
+            if input[1] == v.kod then
+                DoDebug('Kód zadán správně pro: ' .. v.id)
                 exports.ox_inventory:openInventory('stash', v.id)
             else
-                lib.notify({
-                    title = Locale["NotifyTittle"],
-                    description = Locale["NotifyDesc"],
-                    type = 'error'
-                })
+                DoDebug('Špatný kód pro: ' .. v.id)
+                MG.Notify('error', Locale["NotifyTittle"], Locale["NotifyDesc"], 5000, 'fas fa-lock')
             end
         end
     end)
 
-
-    exports.ox_target:addBoxZone({
-        coords = vector3(v.coords.x, v.coords.y, v.coords.z - 1),
-        size = vector3(3.0, 3.0, 3.0),
-        rotation = 0.0,
-        debug = false,
-        options = {
+    MG.AddBoxZone(
+        "stash_" .. v.id, 
+        v.coords, 
+        vector3(1.5, 1.5, 2.0), 
+        {
             {
                 type = "client",
-                event = 'MGCodeStashes:openStash'.. v.id,
+                event = 'mg_codestashes:openStash' .. v.id,
                 icon = Config.TargetIcon,
-                label = Locale["TargetLabel"],     -- Use the index to specify the label of the box
-                distance = 3,
+                label = Locale["TargetLabel"],
+                distance = 2.5,
             }
         }
-    })
-
+    )
 end

@@ -2,7 +2,7 @@ fx_version "cerulean"
 game "gta5"
 lua54 'yes'
 
-author 'MG / MathewGaming'
+author 'MD Development / MathewGaming'
 description 'Script for code on stashes in houses etc.'
 
 client_scripts {
@@ -10,17 +10,13 @@ client_scripts {
 }
 
 server_scripts {
-    'server/*.lua',
+    'server/server_config.lua',
+    'server/server.lua',
     '@oxmysql/lib/MySQL.lua'
 }
 
 shared_scripts {
-    "configs/config.lua",
+    "configs/*.lua",
     '@ox_lib/init.lua',
-    'locales/locale.lua'
-}
-
-escrow_ignore {
-    'configs/config.lua',
-    'locales/locale.lua'
+    'locales/*.lua'
 }
